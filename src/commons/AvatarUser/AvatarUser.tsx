@@ -52,6 +52,7 @@ const AvatarUser: FC<IAvatar> = ({
 			<Avatar
 				src={path}
 				alt={alt}
+				loading="lazy"
 				style={{
 					width,
 					height,

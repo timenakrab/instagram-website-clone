@@ -7,8 +7,7 @@ import {
 	LayoutWrapper,
 	LeftNavbar,
 } from './Layout.styled';
-import { ModalImage } from 'commons';
-import MenuLeft from 'commons/MenuLeft';
+import { ModalImage, MenuLeft } from 'commons';
 
 interface ILayout {
 	children?: ReactNode;

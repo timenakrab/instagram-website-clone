@@ -34,6 +34,5 @@ export const Avatar = styled.img`
 	@media screen and (max-width: 767px) {
 		width: 32px;
 		height: 32px;
-		padding: 5px;
 	}
 `;
