@@ -5,23 +5,30 @@ import { useRecoilState } from 'recoil';
 import { feedItemState, feedPaginationState } from 'globalState/atoms/feed.atom';
 import HeaderFeed from './components/HeaderFeed';
 import ContentFeed from './components/ContentFeed';
+import { tranfromPokemonList } from 'utils/tranfromData';
 // import imagePath from 'utils/imagePath';
 
 interface ReqParam {
-	page: number;
+	offset: number;
 	limit: number;
 }
 
 const HomePage: FC = () => {
 	const init = useRef(false);
-	const [, setFeedItem] = useRecoilState(feedItemState);
+	const [feedItem, setFeedItem] = useRecoilState(feedItemState);
 	const [, setFeedPagination] = useRecoilState(feedPaginationState);
+	const offsetRef = useRef(0);
+	const limitRef = useRef(20);
 
 	const fetchFeed = useCallback(
-		async ({ page, limit }: ReqParam) => {
-			const result = await getContentFeed({ page, limit });
-			setFeedItem(result.data);
-			setFeedPagination(result.pagination);
+		async ({ offset, limit }: ReqParam) => {
+			const response = await getContentFeed({ offset, limit });
+			const list = tranfromPokemonList(response.results);
+			setFeedItem(list);
+			setFeedPagination({
+				offset: offsetRef.current,
+				limit: limitRef.current,
+			});
 		},
 		[setFeedItem, setFeedPagination],
 	);
@@ -29,14 +36,14 @@ const HomePage: FC = () => {
 	useEffect(() => {
 		if (!init.current) {
 			init.current = true;
-			fetchFeed({ page: 1, limit: 20 });
+			fetchFeed({ offset: offsetRef.current, limit: limitRef.current });
 		}
 	}, [fetchFeed]);
 
 	return (
 		<Layout>
 			<HeaderFeed />
-			<ContentFeed />
+			<ContentFeed list={feedItem} />
 		</Layout>
 	);
 };

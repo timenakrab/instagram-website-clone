@@ -1,4 +1,8 @@
 import { apiGet } from './AxiosInterceptors';
 
-const url = '/artworks';
-export const getContentFeed = (params: { page: number; limit: number }) => apiGet(url, { params });
+const url = '/pokemon';
+
+export const getContentFeed = (params: { offset: number; limit: number }) =>
+	apiGet(url, { params });
+
+export const getPokemonData = (id: string) => apiGet(`${url}/${id}`);

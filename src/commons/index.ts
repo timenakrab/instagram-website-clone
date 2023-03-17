@@ -1,4 +1,5 @@
 export { AvatarUser } from './AvatarUser';
+export { Card } from './Card';
 export { Image } from './Image';
 export { Layout } from './Layout';
 export { ModalImage } from './ModalImage';

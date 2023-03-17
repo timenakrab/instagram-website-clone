@@ -1,5 +1,5 @@
-const imagePath = (imageId: string) => {
-	return `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
+const imagePath = (id: string) => {
+	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`;
 };
 
 export default imagePath;
