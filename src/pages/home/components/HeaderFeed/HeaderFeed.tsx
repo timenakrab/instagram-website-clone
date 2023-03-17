@@ -48,10 +48,10 @@ const HeaderFeed: FC = () => {
 				{users[group].map((user, idx) => (
 					<NameUserAvatar key={`h_${idx}`}>
 						<AvatarUser
-							gradientWidth={76}
-							gradientHeight={76}
-							width={66}
-							height={66}
+							gradientWidth={66}
+							gradientHeight={66}
+							width={56}
+							height={56}
 							path={user.avatar}
 							alt={user.username}
 						/>

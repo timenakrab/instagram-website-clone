@@ -30,15 +30,15 @@ export const NameUserAvatar = styled.div`
 export const ButtonPrev = styled(IconButton)`
 	position: absolute !important;
 	z-index: 9;
-	left: -12px;
-	top: 38px;
+	left: 16px;
+	top: 33px;
 	background-color: ${colors.text.ondark.secondary} !important;
 `;
 
 export const ButtonNext = styled(IconButton)`
 	position: absolute !important;
 	z-index: 9;
-	right: -12px;
-	top: 38px;
+	right: 16px;
+	top: 33px;
 	background-color: ${colors.text.ondark.secondary} !important;
 `;

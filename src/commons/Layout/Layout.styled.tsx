@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import colors from 'utils/colors';
-import texts from 'utils/texts';
 
 export const LayoutWrapper = styled.div`
 	width: 100%;
@@ -24,32 +23,6 @@ export const HeaderLeftNavbar = styled.div`
 	padding: 25px 12px 36px 12px;
 	height: 95px;
 	box-sizing: border-box;
-`;
-
-export const MenuList = styled.div`
-	height: calc(100% - 95px);
-`;
-
-export const MenuItem = styled.div`
-	margin: 4px 0px;
-	padding: 12px;
-	height: 56px;
-	box-sizing: border-box;
-
-	& a {
-		display: flex;
-		align-items: center;
-		text-decoration: none;
-		color: ${colors.common.black};
-	}
-	& .name.active {
-		margin-left: 12px;
-		${texts.subtitle1};
-	}
-	& .name {
-		margin-left: 12px;
-		${texts.body1};
-	}
 `;
 
 export const Container = styled.div`

@@ -3,6 +3,7 @@ import { FC } from 'react';
 interface ICircleGradient {
 	isRotate?: boolean;
 	startColor?: string;
+	centerColor?: string;
 	stopColor?: string;
 	width?: number;
 	height?: number;
@@ -10,6 +11,7 @@ interface ICircleGradient {
 const CircleGradient: FC<ICircleGradient> = ({
 	isRotate,
 	startColor = '#ff1493',
+	centerColor = '#bd0a89',
 	stopColor = '#800080',
 	width = 512,
 	height = 512,
@@ -29,6 +31,7 @@ const CircleGradient: FC<ICircleGradient> = ({
 			<defs>
 				<linearGradient id="myGradient" x1="0%" x2="100%" y1="0%" y2="100%">
 					<stop offset="0%" stopColor={startColor}></stop>
+					<stop offset="50%" stopColor={centerColor}></stop>
 					<stop offset="100%" stopColor={stopColor}></stop>
 				</linearGradient>
 			</defs>

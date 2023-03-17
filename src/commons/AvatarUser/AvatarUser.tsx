@@ -41,7 +41,14 @@ const AvatarUser: FC<IAvatar> = ({
 
 	return (
 		<WarpAvatar className={className}>
-			<CircleGradient isRotate={isRotate} width={gradientWidth} height={gradientHeight} />
+			<CircleGradient
+				isRotate={isRotate}
+				width={gradientWidth}
+				height={gradientHeight}
+				startColor="#ffc500"
+				centerColor="#ff1493"
+				stopColor="#bd0a89"
+			/>
 			<Avatar
 				src={path}
 				alt={alt}
