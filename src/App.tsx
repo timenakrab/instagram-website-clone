@@ -1,25 +1,24 @@
-import { FC } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
-const App: FC = () => {
+const HomePage = lazy(() => import(/* webpackChunkName: "instagram-home-page" */ 'pages/home'));
+const SearchPage = lazy(
+	() => import(/* webpackChunkName: "instagram-search-page" */ 'pages/search'),
+);
+
+const App = () => {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
+		<RecoilRoot>
+			<BrowserRouter>
+				<Suspense>
+					<Switch>
+						<Route path="/" component={HomePage} exact />
+						<Route path="/search/:searchText" component={SearchPage} exact />
+					</Switch>
+				</Suspense>
+			</BrowserRouter>
+		</RecoilRoot>
 	);
 };
 
