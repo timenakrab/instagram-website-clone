@@ -1,5 +1,5 @@
 import { AvatarUser } from 'commons';
-import { FC, Fragment, useCallback, useMemo, useState } from 'react';
+import { FC, Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import {
 	ButtonNext,
 	ButtonPrev,
@@ -7,25 +7,18 @@ import {
 	HeaderFeedWrapper,
 	NameUserAvatar,
 } from './HeaderFeed.styled';
-import { faker } from '@faker-js/faker';
 import { chunk } from 'lodash';
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+import randomNumber from 'utils/randomNumber';
+import { getContentFeed } from 'api';
+import { tranfromPokemonList } from 'utils/tranfromData';
 
 const HeaderFeed: FC = () => {
 	const [group, setGroup] = useState(0);
-
-	const users = useMemo(() => {
-		const arrUsers = [];
-		for (let i = 0; i < 24; i += 1) {
-			arrUsers.push({
-				avatar: faker.image.city(1600, 900, true),
-				username: faker.name.firstName(),
-			});
-		}
-
-		return chunk(arrUsers, 8);
-	}, []);
+	const [pokemons, setPokemons] = useState<Pokemon.TranformPokemonItem[][]>([]);
+	const ramdomOffset = useRef(randomNumber(1000));
+	const initHeader = useRef(false);
 
 	const handlePrev = useCallback(() => {
 		setGroup((prevState) => prevState - 1);
@@ -33,6 +26,16 @@ const HeaderFeed: FC = () => {
 
 	const handleNext = useCallback(() => {
 		setGroup((prevState) => prevState + 1);
+	}, []);
+
+	useEffect(() => {
+		if (!initHeader.current) {
+			initHeader.current = true;
+			getContentFeed({ offset: ramdomOffset.current, limit: 24 }).then((response) => {
+				const list = tranfromPokemonList(response.results);
+				setPokemons(chunk(list, 8));
+			});
+		}
 	}, []);
 
 	return (
@@ -45,21 +48,25 @@ const HeaderFeed: FC = () => {
 				<Fragment />
 			)}
 			<HeaderFeedWrapper>
-				{users[group].map((user, idx) => (
-					<NameUserAvatar key={`h_${idx}`}>
-						<AvatarUser
-							gradientWidth={66}
-							gradientHeight={66}
-							width={56}
-							height={56}
-							path={user.avatar}
-							alt={user.username}
-						/>
-						<p>{user.username}</p>
-					</NameUserAvatar>
-				))}
+				{pokemons.length ? (
+					pokemons[group].map((user, idx) => (
+						<NameUserAvatar key={`h_${idx}`}>
+							<AvatarUser
+								gradientWidth={66}
+								gradientHeight={66}
+								width={56}
+								height={56}
+								path={user.picture}
+								alt={user.name}
+							/>
+							<p>{user.name}</p>
+						</NameUserAvatar>
+					))
+				) : (
+					<Fragment />
+				)}
 			</HeaderFeedWrapper>
-			{users.length !== group + 1 ? (
+			{pokemons.length && pokemons.length !== group + 1 ? (
 				<ButtonNext onClick={handleNext} size="small">
 					<Icon path={mdiChevronRight} size={1} />
 				</ButtonNext>

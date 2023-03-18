@@ -1,9 +1,10 @@
-import { mdiHeart, mdiHeartOutline } from '@mdi/js';
+import { mdiHeart, mdiHeartOutline, mdiInformationOutline } from '@mdi/js';
 import Icon from '@mdi/react';
-import { Divider } from '@mui/material';
+// import { Divider } from '@mui/material';
 import { getPokemonData } from 'api';
+import classNames from 'classnames';
 import { likePokemonState } from 'globalState/atoms/like.atom';
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useCallback, useMemo, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import colors from 'utils/colors';
 import sleep from 'utils/sleep';
@@ -23,6 +24,7 @@ import {
 	StatusContainer,
 	StatContainer,
 	TypeContainer,
+	InfoHeader,
 } from './Card.styled';
 
 const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
@@ -30,7 +32,8 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 	const [likePokemon, setLikePokemon] = useRecoilState(likePokemonState);
 	const [classLike, setClassLike] = useState<string | undefined>(undefined);
 	const [pokemonData, setPokemonData] = useState<Pokemon.Data | null>(null);
-	const initData = useRef(false);
+	const [isOpenInfo, setIsOpenInfo] = useState(false);
+	const initPokemonData = useRef(false);
 
 	const animation = useCallback(async () => {
 		setClassLike('fadein');
@@ -54,6 +57,20 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 		[props, animation, setLikePokemon],
 	);
 
+	const handleInfo = useCallback(() => {
+		if (!initPokemonData.current && !isOpenInfo) {
+			initPokemonData.current = true;
+			getPokemonData(id).then((res) => {
+				setPokemonData(res);
+				setIsOpenInfo(true);
+			});
+		} else if (initPokemonData.current && !isOpenInfo) {
+			setIsOpenInfo(true);
+		} else if (initPokemonData.current && isOpenInfo) {
+			setIsOpenInfo(false);
+		}
+	}, [id, isOpenInfo]);
+
 	const isLike = useMemo(() => {
 		const find = likePokemon.find((pokemon) => pokemon.id === props.id);
 		if (find) {
@@ -63,21 +80,12 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 		return false;
 	}, [likePokemon, props.id]);
 
-	useEffect(() => {
-		if (!initData.current) {
-			initData.current = true;
-			getPokemonData(id).then((res) => {
-				setPokemonData(res);
-			});
-		}
-	}, [id]);
-
 	return (
 		<CardContainer>
 			<CardHeader>
 				<MiniAvatar src={avatar} />
 				<Header>
-					<span className="name">{name}</span>
+					<span className="name">{`#${id} ${name}`}</span>
 				</Header>
 				<LikeHeader>
 					<ButtonAction onClick={() => handleLike(!isLike)}>
@@ -88,6 +96,11 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 						/>
 					</ButtonAction>
 				</LikeHeader>
+				<InfoHeader>
+					<ButtonAction onClick={handleInfo}>
+						<Icon path={mdiInformationOutline} size={1} />
+					</ButtonAction>
+				</InfoHeader>
 			</CardHeader>
 			<ImageContainer>
 				<CardImage src={picture} />
@@ -100,7 +113,7 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 					/>
 				</LikeContainer>
 			</ImageContainer>
-			<StatusContainer>
+			<StatusContainer className={classNames({ active: isOpenInfo })}>
 				<div>
 					<TypeContainer>
 						{pokemonData?.types.map((itm) => (
@@ -118,7 +131,6 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 					</StatContainer>
 				</div>
 			</StatusContainer>
-			<Divider className="mt-2 mb-2" />
 		</CardContainer>
 	);
 };

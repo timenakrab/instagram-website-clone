@@ -24,6 +24,13 @@ export const NameUserAvatar = styled.div`
 		color: ${colors.gray[900]};
 		${texts.caption}
 		font-weight: lighter;
+		width: 66px;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+		white-space: break-spaces;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 `;
 

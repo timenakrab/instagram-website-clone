@@ -22,7 +22,7 @@ export const MiniAvatar = styled.img`
 	border: 1px solid ${colors.gray.transparent[32]};
 `;
 export const Header = styled.div`
-	width: calc(100% - 100px);
+	width: calc(100% - 140px);
 	margin-left: 8px;
 	margin-right: 8px;
 	display: flex;
@@ -34,8 +34,15 @@ export const Header = styled.div`
 	}
 `;
 export const LikeHeader = styled.div`
-	width: 42px;
-	height: 42px;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+export const InfoHeader = styled.div`
+	width: 40px;
+	height: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -103,9 +110,13 @@ export const Pill = styled.span<IPill>`
 	text-transform: capitalize;
 `;
 export const StatusContainer = styled.div`
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: flex-start;
+
+	&.active {
+		display: flex;
+	}
 `;
 export const TypeContainer = styled.div`
 	display: flex;
