@@ -6,3 +6,4 @@ export { ModalImage } from './ModalImage';
 export { MenuLeft } from './MenuLeft';
 export { LazyImage } from './LazyImage';
 export { ProgressBar } from './ProgressBar';
+export { NoData } from './NoData';

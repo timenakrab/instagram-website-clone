@@ -6,15 +6,15 @@ const HomePage = lazy(() => import(/* webpackChunkName: "instagram-home-page" */
 // const SearchPage = lazy(
 // 	() => import(/* webpackChunkName: "instagram-search-page" */ 'pages/search'),
 // );
-const ExplorePage = lazy(
-	() => import(/* webpackChunkName: "instagram-explore-page" */ 'pages/explore'),
-);
-const ReelsPage = lazy(() => import(/* webpackChunkName: "instagram-reels-page" */ 'pages/reels'));
-const MessagesPage = lazy(
-	() => import(/* webpackChunkName: "instagram-messages-page" */ 'pages/messages'),
-);
-const NotificationsPage = lazy(
-	() => import(/* webpackChunkName: "instagram-notifications-page" */ 'pages/notifications'),
+// const ExplorePage = lazy(
+// 	() => import(/* webpackChunkName: "instagram-explore-page" */ 'pages/explore'),
+// );
+// const ReelsPage = lazy(() => import(/* webpackChunkName: "instagram-reels-page" */ 'pages/reels'));
+// const MessagesPage = lazy(
+// 	() => import(/* webpackChunkName: "instagram-messages-page" */ 'pages/messages'),
+// );
+const FavoritesPage = lazy(
+	() => import(/* webpackChunkName: "instagram-favorites-page" */ 'pages/favorites'),
 );
 
 const App = () => {
@@ -25,10 +25,10 @@ const App = () => {
 					<Switch>
 						<Route path="/" component={HomePage} exact />
 						<Route path="/search" component={HomePage} exact />
-						<Route path="/explore" component={ExplorePage} exact />
+						{/* <Route path="/explore" component={ExplorePage} exact />
 						<Route path="/reels" component={ReelsPage} exact />
-						<Route path="/messages" component={MessagesPage} exact />
-						<Route path="/notifications" component={NotificationsPage} exact />
+						<Route path="/messages" component={MessagesPage} exact /> */}
+						<Route path="/favorites" component={FavoritesPage} exact />
 					</Switch>
 				</Suspense>
 			</BrowserRouter>
