@@ -6,7 +6,6 @@ import { feedItemState, feedPaginationState } from 'globalState/atoms/feed.atom'
 import HeaderFeed from './components/HeaderFeed';
 import ContentFeed from './components/ContentFeed';
 import { tranfromPokemonList } from 'utils/tranfromData';
-// import imagePath from 'utils/imagePath';
 
 interface ReqParam {
 	offset: number;

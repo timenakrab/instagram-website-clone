@@ -17,6 +17,10 @@ import { tranfromPokemonList } from 'utils/tranfromData';
 const HeaderFeed: FC = () => {
 	const [group, setGroup] = useState(0);
 	const [pokemons, setPokemons] = useState<Pokemon.TranformPokemonItem[][]>([]);
+	const [windowDimensions, setWindowDimensions] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
 	const ramdomOffset = useRef(randomNumber(1000));
 	const initHeader = useRef(false);
 
@@ -38,6 +42,32 @@ const HeaderFeed: FC = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowDimensions({
+				width: window.innerWidth,
+				height: window.innerHeight,
+			});
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	let gradientWidthHeight = 66;
+	let avatarWidthHeight = 56;
+
+	if (windowDimensions.width > 425 && windowDimensions.width <= 768) {
+		gradientWidthHeight = 52;
+		avatarWidthHeight = 42;
+	} else if (windowDimensions.width <= 425) {
+		gradientWidthHeight = 36;
+		avatarWidthHeight = 32;
+	}
+
 	return (
 		<HeaderContainer>
 			{group !== 0 ? (
@@ -52,14 +82,14 @@ const HeaderFeed: FC = () => {
 					pokemons[group].map((user, idx) => (
 						<NameUserAvatar key={`h_${idx}`}>
 							<AvatarUser
-								gradientWidth={66}
-								gradientHeight={66}
-								width={56}
-								height={56}
+								gradientWidth={gradientWidthHeight}
+								gradientHeight={gradientWidthHeight}
+								width={avatarWidthHeight}
+								height={avatarWidthHeight}
 								path={user.avatar}
 								alt={user.name}
 							/>
-							<p>{user.name}</p>
+							<p style={{ width: gradientWidthHeight }}>{user.name}</p>
 						</NameUserAvatar>
 					))
 				) : (

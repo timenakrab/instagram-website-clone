@@ -15,6 +15,16 @@ export const LeftNavbar = styled.div`
 	width: 245px;
 	height: 100vh;
 	border-right: 1px solid ${colors.gray.transparent[24]};
+	overflow: hidden;
+
+	@media screen and (max-width: 767px) {
+		width: 0px;
+		padding: 0px;
+	}
+
+	@media screen and (min-width: 768px) and (max-width: 991px) {
+		width: 160px;
+	}
 `;
 
 export const HeaderLeftNavbar = styled.div`
@@ -26,11 +36,28 @@ export const HeaderLeftNavbar = styled.div`
 `;
 
 export const Container = styled.div`
+	display: flex;
+	justify-content: center;
 	min-height: 100vh;
-	padding-left: 245px;
+	margin-left: 245px;
+
+	@media screen and (max-width: 767px) {
+		margin-left: 0px;
+	}
+
+	@media screen and (min-width: 768px) and (max-width: 991px) {
+		margin-left: 160px;
+	}
 `;
 
 export const FeedContainer = styled.div`
 	width: 630px;
-	margin: 0 auto;
+
+	@media screen and (max-width: 767px) {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 768px) and (max-width: 991px) {
+		width: 630px;
+	}
 `;

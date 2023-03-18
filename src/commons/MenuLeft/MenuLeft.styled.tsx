@@ -23,9 +23,27 @@ export const MenuItem = styled.div`
 		${texts.subtitle1};
 		font-weight: 500;
 	}
+	& svg {
+		width: 24px;
+		height: 24px;
+	}
 	& .name {
 		margin-left: 12px;
 		${texts.body1};
 		font-weight: 300;
+	}
+
+	@media screen and (max-width: 767px) {
+		width: 0px;
+	}
+
+	@media screen and (min-width: 768px) and (max-width: 991px) {
+		& svg {
+			width: 16px;
+			height: 16px;
+		}
+		& .name {
+			${texts.body2};
+		}
 	}
 `;

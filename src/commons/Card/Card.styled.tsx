@@ -9,6 +9,16 @@ export const CardContainer = styled.div`
 	padding-bottom: 8px;
 	padding-left: 80px;
 	padding-right: 80px;
+
+	@media screen and (max-width: 767px) {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	@media screen and (min-width: 768px) and (max-width: 991px) {
+		padding-left: 64px;
+		padding-right: 64px;
+	}
 `;
 export const CardHeader = styled.div`
 	display: flex;

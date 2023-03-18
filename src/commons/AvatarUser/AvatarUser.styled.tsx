@@ -15,8 +15,6 @@ export const WarpAvatar = styled.div`
 
 	@media screen and (max-width: 767px) {
 		& svg {
-			width: 80px;
-			height: 80px;
 			position: absolute;
 			z-index: -1;
 		}

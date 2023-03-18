@@ -4,5 +4,9 @@
 	"tabWidth": 2,
 	"semi": true,
 	"singleQuote": true,
-	"endOfLine":"auto"
+	"endOfLine":"auto",
+	"importOrder": ["^@mdi/(.*)$", "^[./]"],
+	"importOrderSeparation": true,
+	"importOrderSortSpecifiers": true,
+	"importOrderCaseInsensitive": true
 }

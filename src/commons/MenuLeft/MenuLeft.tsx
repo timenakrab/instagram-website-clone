@@ -69,7 +69,7 @@ const MenuLeft: FC = () => {
 			{menus.map((menu, idx) => (
 				<MenuItem key={`menu_${idx}`}>
 					<Link to={menu.path}>
-						<Icon path={currentPath === menu.path ? menu.iconActive : menu.icon} size="24px" />
+						<Icon path={currentPath === menu.path ? menu.iconActive : menu.icon} />
 						<span className={classNames('name', { active: currentPath === menu.path })}>
 							{menu.name}
 						</span>
