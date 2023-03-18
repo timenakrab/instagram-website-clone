@@ -1,4 +1,9 @@
 declare namespace Feed {
+	interface ReqParam {
+		offset: number;
+		limit: number;
+	}
+
 	interface Item {
 		id: number;
 		api_link: string;

@@ -1,6 +1,6 @@
 import { selector } from 'recoil';
 
-import { feedItemState, feedPaginationState } from '../atoms/feed.atom';
+import { feedItemState, feedPaginationState, feedLoadMoreState } from '../atoms/feed.atom';
 
 export const feedItemSelector = selector({
 	key: 'feedItemSelector',
@@ -17,5 +17,14 @@ export const feedPaginationSelector = selector({
 		const feedPagination = get(feedPaginationState);
 
 		return feedPagination;
+	},
+});
+
+export const feedLoadMoreSelector = selector({
+	key: 'feedLoadMoreSelector',
+	get: ({ get }) => {
+		const isLoadmore = get(feedLoadMoreState);
+
+		return isLoadmore;
 	},
 });

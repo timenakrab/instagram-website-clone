@@ -12,3 +12,8 @@ export const feedPaginationState = atom<Pokemon.PaginationList>({
 		limit: 20,
 	},
 });
+
+export const feedLoadMoreState = atom<boolean>({
+	key: 'feedLoadMoreState',
+	default: true,
+});

@@ -5,7 +5,6 @@ export const LayoutWrapper = styled.div`
 	width: 100%;
 	min-height: 100vh;
 `;
-
 export const LeftNavbar = styled.div`
 	position: fixed;
 	padding: 12px;
@@ -26,7 +25,6 @@ export const LeftNavbar = styled.div`
 		width: 160px;
 	}
 `;
-
 export const HeaderLeftNavbar = styled.div`
 	display: flex;
 	align-items: center;
@@ -34,7 +32,6 @@ export const HeaderLeftNavbar = styled.div`
 	height: 95px;
 	box-sizing: border-box;
 `;
-
 export const Container = styled.div`
 	display: flex;
 	justify-content: center;
@@ -49,12 +46,12 @@ export const Container = styled.div`
 		margin-left: 160px;
 	}
 `;
-
 export const FeedContainer = styled.div`
 	width: 630px;
 
 	@media screen and (max-width: 767px) {
 		width: 100%;
+		margin-bottom: 50px;
 	}
 
 	@media screen and (min-width: 768px) and (max-width: 991px) {

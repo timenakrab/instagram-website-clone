@@ -28,7 +28,7 @@ import {
 } from './Card.styled';
 
 const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
-	const { id, avatar, picture, name } = props;
+	const { id, avatar, name } = props;
 	const [likePokemon, setLikePokemon] = useRecoilState(likePokemonState);
 	const [classLike, setClassLike] = useState<string | undefined>(undefined);
 	const [pokemonData, setPokemonData] = useState<Pokemon.Data | null>(null);
@@ -103,7 +103,7 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 				</InfoHeader>
 			</CardHeader>
 			<ImageContainer>
-				<CardImage src={picture ?? avatar} />
+				<CardImage src={avatar} />
 				<LikeContainer onDoubleClick={() => handleLike(true)}>
 					<FadeInOutLove
 						className={classLike}

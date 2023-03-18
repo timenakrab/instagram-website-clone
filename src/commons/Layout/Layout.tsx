@@ -7,7 +7,7 @@ import {
 	LayoutWrapper,
 	LeftNavbar,
 } from './Layout.styled';
-import { ModalImage, MenuLeft } from 'commons';
+import { ModalImage, MenuLeft, MenuMobile } from 'commons';
 import { getContentFeed } from 'api';
 import { tranfromPokemonList } from 'utils/tranfromData';
 import { useRecoilState } from 'recoil';
@@ -80,6 +80,7 @@ const Layout: FC<ILayout> = ({ children }) => {
 				<FeedContainer>{children}</FeedContainer>
 			</Container>
 			<ModalImage />
+			{windowDimensions.width < 768 ? <MenuMobile /> : <Fragment />}
 		</LayoutWrapper>
 	);
 };
