@@ -16,10 +16,8 @@ const LoadMore: FC<ILoadMore> = ({ visible, cbLoadmore }) => {
 	useEffect(() => {
 		if (inView) {
 			cbLoadmore(true);
-			console.log('show');
 		} else {
 			cbLoadmore(false);
-			console.log('not show');
 		}
 	}, [cbLoadmore, inView]);
 
