@@ -56,7 +56,7 @@ const HeaderFeed: FC = () => {
 								gradientHeight={66}
 								width={56}
 								height={56}
-								path={user.picture}
+								path={user.avatar}
 								alt={user.name}
 							/>
 							<p>{user.name}</p>

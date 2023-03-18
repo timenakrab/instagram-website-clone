@@ -103,7 +103,7 @@ const Card: FC<Pokemon.TranformPokemonItem> = (props) => {
 				</InfoHeader>
 			</CardHeader>
 			<ImageContainer>
-				<CardImage src={picture} />
+				<CardImage src={picture ?? avatar} />
 				<LikeContainer onDoubleClick={() => handleLike(true)}>
 					<FadeInOutLove
 						className={classLike}

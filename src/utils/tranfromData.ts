@@ -10,7 +10,7 @@ export const tranfromPokemonList = (
 
 		return {
 			id,
-			avatar: `${pathImage}/other/dream-world/${id}.svg`,
+			avatar: `${pathImage}/other/official-artwork/${id}.png`,
 			picture: `${pathImage}/other/home/${id}.png`,
 			...itm,
 		};
