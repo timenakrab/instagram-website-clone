@@ -16,3 +16,12 @@ export const tranfromPokemonList = (
 		};
 	});
 };
+
+export const tranfromAutoComplete = (
+	list: Pokemon.TranformPokemonItem[],
+): Search.AutoComplete[] => {
+	return list.map((itm) => ({
+		label: itm.name,
+		id: itm.id,
+	}));
+};

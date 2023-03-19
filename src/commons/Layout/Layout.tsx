@@ -9,19 +9,23 @@ import {
 } from './Layout.styled';
 import { ModalImage, MenuLeft, MenuMobile } from 'commons';
 import { getContentFeed } from 'api';
-import { tranfromPokemonList } from 'utils/tranfromData';
-import { useRecoilState } from 'recoil';
+import { tranfromAutoComplete, tranfromPokemonList } from 'utils/tranfromData';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { lastDownloadState } from 'globalState/atoms/lastdownload.atom';
+import { autoCompletePokemonState } from 'globalState/atoms/search.atom';
 
 interface ILayout {
+	navbarComponent?: ReactNode;
 	children?: ReactNode;
 }
-const Layout: FC<ILayout> = ({ children }) => {
+const Layout: FC<ILayout> = ({ navbarComponent = null, children }) => {
 	const [windowDimensions, setWindowDimensions] = useState({
 		width: window.innerWidth,
 		height: window.innerHeight,
 	});
 	const [lastDownload, setLastDownload] = useRecoilState(lastDownloadState);
+	const setAutocompletePokemon = useSetRecoilState(autoCompletePokemonState);
+
 	const indexedDb = useMemo(() => {
 		return new IndexedDb('pokedex');
 	}, []);
@@ -41,13 +45,19 @@ const Layout: FC<ILayout> = ({ children }) => {
 			if (data.length === 0 || currentTimestamp > lastDownload) {
 				getContentFeed({ offset: 0, limit: 1281 }).then((response) => {
 					const list = tranfromPokemonList(response.results);
+					const autocomplete = tranfromAutoComplete(list);
 					updatePokedex(list);
 					setLastDownload(currentTimestamp + 86400000);
+					setAutocompletePokemon(autocomplete);
 				});
+			} else {
+				const list = tranfromPokemonList(data);
+				const autocomplete = tranfromAutoComplete(list);
+				setAutocompletePokemon(autocomplete);
 			}
 		};
 		runIndexDb();
-	}, [indexedDb, lastDownload, setLastDownload, updatePokedex]);
+	}, [indexedDb, lastDownload, setLastDownload, updatePokedex, setAutocompletePokemon]);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -66,6 +76,7 @@ const Layout: FC<ILayout> = ({ children }) => {
 
 	return (
 		<LayoutWrapper>
+			{navbarComponent}
 			{windowDimensions.width >= 768 ? (
 				<LeftNavbar>
 					<HeaderLeftNavbar>

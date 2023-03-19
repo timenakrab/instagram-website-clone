@@ -1,5 +1,6 @@
 export { AvatarUser } from './AvatarUser';
 export { Card } from './Card';
+export { CardSearch } from './CardSearch';
 export { Image } from './Image';
 export { Layout } from './Layout';
 export { LazyImage } from './LazyImage';

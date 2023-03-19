@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 const HomePage = lazy(() => import(/* webpackChunkName: "instagram-home-page" */ 'pages/home'));
-// const SearchPage = lazy(
-// 	() => import(/* webpackChunkName: "instagram-search-page" */ 'pages/search'),
-// );
+const SearchPage = lazy(
+	() => import(/* webpackChunkName: "instagram-search-page" */ 'pages/search'),
+);
 // const ExplorePage = lazy(
 // 	() => import(/* webpackChunkName: "instagram-explore-page" */ 'pages/explore'),
 // );
@@ -24,7 +24,7 @@ const App = () => {
 				<Suspense>
 					<Switch>
 						<Route path="/" component={HomePage} exact />
-						<Route path="/search" component={HomePage} exact />
+						<Route path="/search" component={SearchPage} exact />
 						{/* <Route path="/explore" component={ExplorePage} exact />
 						<Route path="/reels" component={ReelsPage} exact />
 						<Route path="/messages" component={MessagesPage} exact /> */}
